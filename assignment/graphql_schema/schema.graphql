@@ -1,0 +1,54 @@
+scalar datetime
+
+type Author{
+    id: String!
+    name: String!
+    DOB: datetime
+}
+
+type Book{
+    id: String!
+    name: String!
+    genre: String!
+    author: Author!
+    published_year: datetime!
+    created_at: datetime!
+    updated_at: datetime!
+}
+
+# query
+type Query{
+    authors: [Author!]!
+    author(id: String!): Author
+    books: [Book!]!
+    book(id: String!): Book
+}
+
+# mutation
+input CreateAuthorInput {
+  name: String!
+  DOB: datetime!
+}
+input UpdateAuthorInput {
+  name: String!
+  DOB: datetime!
+}
+input CreateBookInput {
+  name: String!
+  genre: String!
+  author: String!
+  published_year: datetime!
+}
+input UpdateBookInput {
+  name: String!
+  genre: String!
+  author: String!
+  published_year: datetime!
+}
+
+type Mutation{
+    createAuthor(input: CreateAuthorInput!): Author!
+    createBook(input: CreateBookInput!): Book!
+    updateAuthor(input: UpdateAuthorInput!): Author!
+    updateBook(input: UpdateBookInput!): Book!
+}
