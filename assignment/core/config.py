@@ -13,3 +13,8 @@ APP_NAME = config("APP_NAME", cast=str, default="Book's API")
 REDIS_HOST = config("REDIS_HOST", cast=str, default="redis")
 REDIS_PORT = config("REDIS_PORT", cast=int, default=6379)
 REDIS_DB = config("REDIS_DB", cast=int, default=0)
+GOOGLE_CLIENT_ID = config("GOOGLE_CLIENT_ID", cast=str)
+GOOGLE_CLIENT_SECRET = config("GOOGLE_CLIENT_SECRET", cast=str)
+GOOGLE_REDIRECT_URI = config("GOOGLE_REDIRECT_URI", cast=str)
+GOOGLE_AUTH_URL = "https://accounts.google.com/o/oauth2/v2/auth"
+GOOGLE_TOKEN_URL = "https://oauth2.googleapis.com/token"

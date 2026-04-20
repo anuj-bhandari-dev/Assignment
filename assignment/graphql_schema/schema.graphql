@@ -17,12 +17,20 @@ type Book{
     updated_at: datetime!
 }
 
+type User{
+  googleId: String!
+  email: String!
+  name: String!
+  picture: String
+}
+
 # query
 type Query{
     authors: [Author!]!
     author(_id: String!): Author
     books: [Book!]!
     book(_id: String!): Book
+    me: User
 }
 
 # mutation

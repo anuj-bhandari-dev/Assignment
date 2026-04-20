@@ -99,3 +99,18 @@ async def resolve_book(_, info, _id: str):
     except Exception as e:
         logger.error(f"Error fetching book: {str(e)}")
         raise
+
+
+@query.field("me")
+async def resolve_me(_, info):
+    request = info.context["request"]
+    # Well we can also query from db.
+    user = request.session.get("user")
+    if not user:
+        return None
+    return {
+        "googleId": user["google_id"],
+        "email": user["email"],
+        "name": user["name"],
+        "picture": user["picture"],
+    }

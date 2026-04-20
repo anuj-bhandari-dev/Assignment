@@ -8,6 +8,7 @@ services:
      - "8000:8000"
     environment:
       # Database
+      DATABASE_URL: mongodb://admin:password@mongodb:27017/?authSource=admin
       MONGO_HOST: mongodb
       MONGO_PORT: 27017
       MONGO_USER: admin
@@ -65,6 +66,7 @@ services:
     container_name: worker
     command: arq assignment.core.worker.WorkerSettings
     environment:
+      DATABASE_URL: mongodb://admin:password@mongodb:27017/?authSource=admin
       REDIS_HOST: redis
       REDIS_PORT: 6379
       REDIS_DB: 1
