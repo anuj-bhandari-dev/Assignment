@@ -1,13 +1,14 @@
 scalar datetime
 
 type Author{
-    id: String!
+    _id: String!
     name: String!
     DOB: datetime
+    email: String!
 }
 
 type Book{
-    id: String!
+    _id: String!
     name: String!
     genre: String!
     author: Author!
@@ -19,36 +20,47 @@ type Book{
 # query
 type Query{
     authors: [Author!]!
-    author(id: String!): Author
+    author(_id: String!): Author
     books: [Book!]!
-    book(id: String!): Book
+    book(_id: String!): Book
 }
 
 # mutation
 input CreateAuthorInput {
   name: String!
   DOB: datetime!
+  email: String!
 }
 input UpdateAuthorInput {
   name: String!
   DOB: datetime!
+  email: String!
 }
 input CreateBookInput {
   name: String!
   genre: String!
-  author: String!
+  author_id: String!
   published_year: datetime!
 }
 input UpdateBookInput {
   name: String!
   genre: String!
-  author: String!
+  author_id: String!
   published_year: datetime!
+}
+input SendEmailInput {
+  email: String!
+}
+
+type EmailResponse {
+  success: Boolean!
+  message: String!
 }
 
 type Mutation{
     createAuthor(input: CreateAuthorInput!): Author!
     createBook(input: CreateBookInput!): Book!
-    updateAuthor(input: UpdateAuthorInput!): Author!
-    updateBook(input: UpdateBookInput!): Book!
+    updateAuthor(_id: String!, input: UpdateAuthorInput!): Author!
+    updateBook(_id: String!, input: UpdateBookInput!): Book!
+    sendEmail(input: SendEmailInput!): EmailResponse!
 }

@@ -1,8 +1,9 @@
 from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorDatabase
-from core import DATABASE_URL, LoggerSetup
+from assignment.core import DATABASE_URL, LoggerSetup
+from arq.connections import RedisSettings, create_pool
 
 client: AsyncIOMotorClient = None
-
+redis_settings = RedisSettings()
 logger = LoggerSetup().setup_logger(name="DB connection")
 
 
@@ -21,3 +22,7 @@ async def close_db():
 
 async def get_db() -> AsyncIOMotorDatabase:
     return client.MyBooks
+
+
+async def get_redis():
+    return await create_pool(redis_settings)

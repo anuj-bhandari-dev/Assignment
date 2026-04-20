@@ -1,13 +1,13 @@
 from pydantic import BaseModel, ConfigDict, Field
-from typing import Annotated
+from typing import Annotated, Optional
 from datetime import datetime
 
 
 # author schema
 class CreateAuthor(BaseModel):
     name: Annotated[str, Field(max_length=255)]
-    nationality: Annotated[str, Field(max_length=255)]
     DOB: datetime
+    email: str
 
 
 class AuthorResponse(BaseModel):
@@ -15,23 +15,23 @@ class AuthorResponse(BaseModel):
 
     id: str = Field(alias="_id")
     name: str
-    nationality: str
+    email: str
     DOB: datetime
     created_at: datetime
     updated_at: datetime
 
 
 class UpdateAuthor(BaseModel):
-    name: Annotated[str | None, Field(max_length=255)] = None
-    nationality: Annotated[str | None, Field(default=None, max_length=255)] = None
-    DOB: datetime
+    name: Optional[Annotated[str, Field(max_length=255)]] = None
+    DOB: Optional[datetime] = None
+    email: Optional[Annotated[str, Field(max_length=255)]] = None
 
 
 #  book schema
 class CreateBook(BaseModel):
     name: Annotated[str, Field(max_length=255)]
     genre: Annotated[str, Field(max_length=255)]
-    author_id: Annotated[str, Field(max_length=255)]
+    author: Annotated[str, Field(max_length=255)]
     published_year: datetime
 
 
@@ -41,7 +41,7 @@ class BookResponse(BaseModel):
     id: str = Field(alias="_id")
     name: str
     genre: str
-    author_id: str
+    author: str
     published_year: datetime
     created_at: datetime
     updated_at: datetime
